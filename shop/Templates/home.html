@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Koti's E-Commerce</title>
+
+    <!-- Bootstrap -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
+
+    <!-- Icons -->
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+        body {
+            background: #f7f9fc;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
+        .navbar-brand {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 45px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .hero p {
+            font-size: 18px;
+            animation: fadeIn 1.3s ease-in-out;
+        }
+
+        /* Button animation */
+        .btn-animated {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-animated:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Product Cards */
+        .card:hover {
+            transform: scale(1.03);
+            transition: 0.3s;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f1f1f;
+            color: #aaa;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg px-4">
+        <a class="navbar-brand" href="#">Koti's E-Commerce</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Welcome to Your E-Commerce Backend</h1>
+        <p>Powerful APIs ready for integration 🚀</p>
+
+        <div class="mt-4">
+            <a href="/api/products/" class="btn btn-light btn-lg btn-animated me-3">
+                <i class="fas fa-box"></i> View Products
+            </a>
+            <a href="/api/categories/" class="btn btn-dark btn-lg btn-animated">
+                <i class="fas fa-tags"></i> View Categories
+            </a>
+        </div>
+    </section>
+
+    <!-- API QUICK LINKS -->
+    <section class="container mt-5">
+        <h2 class="section-title">Quick API Access</h2>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <a href="/api/users/register/" class="btn btn-primary w-100 btn-animated mb-3">
+                    <i class="fas fa-user-plus"></i> Register API
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/api/users/login/" class="btn btn-success w-100 btn-animated mb-3">
+                    <i class="fas fa-sign-in-alt"></i> Login API
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/api/cart/?user_id=1" class="btn btn-warning w-100 btn-animated mb-3">
+                    <i class="fas fa-shopping-cart"></i> Cart API
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/api/orders/?user_id=1" class="btn btn-info w-100 btn-animated mb-3">
+                    <i class="fas fa-receipt"></i> Orders API
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAMPLE PRODUCTS -->
+    <section class="container mt-5 mb-5">
+        <h2 class="section-title">Sample Product Preview</h2>
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Sample Product</h5>
+                        <p class="card-text">This is a preview card. Real products will load from your API later.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 2</h5>
+                        <p class="card-text">Use your product API to display real items.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Koti's E-Commerce Backend – All Rights Reserved</p>
+    </footer>
+<!-- REAL PRODUCT PREVIEW -->
+<section class="container mt-5 mb-5">
+    <h2 class="section-title">Latest Products</h2>
+
+    <div class="row justify-content-center">
+        {% for product in products %}
+        <div class="col-md-3 m-2">
+            <div class="card" style="width: 100%;">
+                {% if product.images %}
+                    <img src="{{ product.images.0.image_url }}" class="card-img-top" style="height:200px; object-fit:cover;">
+                {% else %}
+                    <img src="https://via.placeholder.com/300" class="card-img-top">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text text-muted">
+                        ₹{{ product.discount_price }}  
+                        <small><del>₹{{ product.price }}</del></small>
+                    </p>
+
+                    <a href="/api/products/{{ product.product_id }}/" class="btn btn-primary w-100 btn-animated">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No products found.</p>
+        {% endfor %}
+    </div>
+</section>
+
+
+</body>
+</html>
