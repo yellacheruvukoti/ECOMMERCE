@@ -2,4 +2,4 @@ Django
 pillow
 whitenoise
 gunicorn
-	
+djangorestframework
