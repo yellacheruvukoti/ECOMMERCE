@@ -1,5 +1,7 @@
+from django.urls import path, include
+from .views import products_page  # Import your view
 from rest_framework.routers import DefaultRouter
-from .views import UserViewSet, CategoryViewSet, ProductViewSet, CartViewSet, OrderViewSet
+from .viewsets import UserViewSet, CategoryViewSet, ProductViewSet, CartViewSet, OrderViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='users')
@@ -8,4 +10,7 @@ router.register(r'products', ProductViewSet, basename='products')
 router.register(r'cart', CartViewSet, basename='cart')
 router.register(r'orders', OrderViewSet, basename='orders')
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('', include(router.urls)),     # Your API routes
+    path('products-page/', products_page),  # Your HTML page
+]
