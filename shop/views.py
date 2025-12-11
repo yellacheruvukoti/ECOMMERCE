@@ -14,14 +14,15 @@ def home(request):
 
     return render(request, "home.html", {"products": products})
 def products_page(request):
-    # Fetch products from your API
     try:
-        response = requests.get("http://127.0.0.1:8000/api/products/")
+        response = requests.get("http://127.0.0.1:8000/products/")
         products = response.json()
-    except:
+    except Exception as e:
+        print("Error:", e)
         products = []
 
     return render(request, "products.html", {"products": products})
+
 
 
 from .models import (
