@@ -13,12 +13,13 @@ def home(request):
         products = []  # if API down or no product
 
     return render(request, "home.html", {"products": products})
-def products_page(request):
+ef products_page(request):
     try:
-        response = requests.get("http://127.0.0.1:8000/products/")
+        # ⬇️ This is the correct place for the API call
+        response = requests.get("http://127.0.0.1:8000/api/products/")
         products = response.json()
     except Exception as e:
-        print("Error:", e)
+        print("Error fetching products:", e)
         products = []
 
     return render(request, "products.html", {"products": products})
