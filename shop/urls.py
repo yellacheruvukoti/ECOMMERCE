@@ -1,7 +1,11 @@
+from django.contrib import admin
 from django.urls import path, include
-from .views import products_page  # Import your view
 from rest_framework.routers import DefaultRouter
-from .viewsets import UserViewSet, CategoryViewSet, ProductViewSet, CartViewSet, OrderViewSet
+from appname.views import products_page  # your HTML page view
+from appname.viewsets import (
+    UserViewSet, CategoryViewSet, ProductViewSet,
+    CartViewSet, OrderViewSet
+)
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='users')
